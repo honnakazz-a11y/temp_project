@@ -28,7 +28,26 @@ def read_csv_rows(path):
             continue
     print(f"[ERROR] cannot decode CSV: {path}", file=sys.stderr)
     sys.exit(1)
-
+    
+def infer_mode(row):
+    mode = (row.get("mode") or "").strip().lower()
+    if mode in ("normal","ura"):
+        return mode
+    # 1) route から推測
+    route = (row.get("suggested_route") or "").lower()
+    if "/ura" in route:
+        return "ura"
+    if "/normal" in route:
+        return "normal"
+    # 2) ファイル名・クラス名から推測
+    for key in ("suggested_dart_file","suggested_class","mock_file","screen"):
+        val = (row.get(key) or "").lower()
+        if "ura" in val:
+            return "ura"
+        if "normal" in val:
+            return "normal"
+    return ""  # 判定不能
+    
 def main():
     if not os.path.isfile(CSV_PATH):
         print(f"[ERROR] CSV not found: {CSV_PATH}", file=sys.stderr)
@@ -40,7 +59,7 @@ def main():
     created = []
     for i, row in enumerate(rows, start=1):
         mock  = (row.get(COL_MOCK)  or "").strip()
-        mode  = (row.get(COL_MODE)  or "").strip().lower()
+        mode  = infer_mode(row)
         dfile = (row.get(COL_FILE)  or "").strip()
         cls   = (row.get(COL_CLASS) or "").strip()
 

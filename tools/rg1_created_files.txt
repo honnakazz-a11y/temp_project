@@ -1,0 +1,10 @@
+lib/screens/normal/input_normal_char.dart
+lib/screens/normal/generate_normal_no_char.dart
+lib/screens/normal/menu_normal.dart
+lib/screens/normal/generate_normal_char.dart
+lib/screens/normal/input_normal_nochar.dart
+lib/screens/ura/menu_ura.dart
+lib/screens/ura/generate_ura_no_char.dart
+lib/screens/ura/input_ura_nochar.dart
+lib/screens/ura/input_ura_char.dart
+lib/screens/ura/generate_ura_char.dart

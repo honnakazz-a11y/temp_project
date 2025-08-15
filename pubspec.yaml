@@ -1,0 +1,82 @@
+name: excuse_maker_fixed
+description: 言い訳メーカー超 - Flutter雛形
+version: 1.0.0
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  video_player: ^2.7.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/balloon_angel.png
+    - assets/images/balloon_devil.png
+    - assets/images/balloon_twins.png
+    - assets/images/bg_dark_default.png
+    - assets/images/bg_dark_glitch1.png
+    - assets/images/bg_dark_glitch2.png
+    - assets/images/bg_main_default.png
+    - assets/images/btn_analyze_default.png
+    - assets/images/btn_analyze_pressed.png
+    - assets/images/btn_back_bottom_pressed.png
+    - assets/images/btn_back_bottom_default.png
+    - assets/images/btn_back_top_default.png
+    - assets/images/btn_back_top_pressed.png
+    - assets/images/btn_character_toggle_off.png
+    - assets/images/btn_character_toggle_on.png
+    - assets/images/btn_forbidden_default.png
+    - assets/images/btn_forbidden_pressed.png
+    - assets/images/btn_generate_pressed.png
+    - assets/images/btn_generate_default.png
+    - assets/images/btn_guide_default.png
+    - assets/images/btn_guide_pressed.png
+    - assets/images/btn_oracle_default.png
+    - assets/images/btn_oracle_pressed.png
+    - assets/images/btn_share_default.png
+    - assets/images/btn_share_pressed.png
+    - assets/images/btn_sound_toggle_off.png
+    - assets/images/btn_sound_toggle_on.png
+    - assets/images/btn_start_analysis_pressed.png
+    - assets/images/btn_start_analysis_default.png
+    - assets/images/btn_start_generate_pressed.png
+    - assets/images/btn_start_generate_default.png
+    - assets/images/btn_tryagain_pressed.png
+    - assets/images/btn_tryagain_default.png
+    - assets/images/char_angel.png
+    - assets/images/char_devil.png
+    - assets/images/char_twins_1.png
+    - assets/images/character_twins_2.png
+    - assets/images/input_field.png
+    - assets/images/label_braun_frame_default.png
+    - assets/images/label_braun_frame_glitch1.png
+    - assets/images/label_braun_frame_glitch2.png
+    - assets/images/label_braun_frame_glitch3.png
+    - assets/images/label_braun_frame_pristine.png
+    - assets/images/label_braun_text_guide.png
+    - assets/images/meter_0.png
+    - assets/images/meter_1_m1.png
+    - assets/images/meter_1_p1.png
+    - assets/images/meter_1.png
+    - assets/images/meter_3_m1.png
+    - assets/images/meter_3_p1.png
+    - assets/images/meter_3.png
+    - assets/images/meter_5_m1.png
+    - assets/images/meter_5_p1.png
+    - assets/images/meter_5.png
+    - assets/images/meter_7_m1.png
+    - assets/images/meter_7_p1.png
+    - assets/images/meter_7.png
+    - assets/images/meter_9_m1.png
+    - assets/images/meter_9_p1.png
+    - assets/images/meter_9.png
+    - assets/images/meter_max_p1.png
+    - assets/images/meter_max.png
+    - assets/images/slider_level_kami.png
+    - assets/images/slider_level_normal.png
+    - assets/images/slider_level_unko.png
+    - assets/images/ubix_opening_static_6plus.png

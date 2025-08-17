@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+part 'screens/opening/splash_video_screen.dart';
 part 'screens/normal/guide_normal.dart';
 part 'screens/ura/guide_ura.dart';
 part 'screens/normal/menu_normal.dart';
@@ -8,6 +11,8 @@ part 'screens/ura/input_ura_nochar.dart';
 part 'screens/normal/generate_normal_no_char.dart';
 part 'screens/ura/generate_ura_no_char.dart';
 part 'screens/ura/analysis_input_ura.dart';
+part 'screens/ura/analysis_result_ura.dart';
+part 'screens/ura/forbidden_ura_no_char.dart';
 
 void main() => runApp(const TempProjectApp());
 
@@ -19,8 +24,9 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 初期表示は必要に応じて
-      home: const MenuScreenUra(),
+      home: const ForbiddenScreenUraNoChar(),
       routes: {
+        '/opening': (context) => const SplashVideoScreen(), 
         '/input/normal': (context) => const InputScreenNormalNoChar(),
         '/guide/normal': (context) => const GuideScreenNormal(),
         '/menu/normal': (context) => const MenuScreenNormal(),
@@ -31,6 +37,7 @@ class TempProjectApp extends StatelessWidget {
         '/analysis/input/ura': (context) => const AnalysisInputScreenUra(),
         '/generate/normal': (context) => const GenerateScreenNoChar(),
         '/guide/ura': (context) => const GuideScreenUra(),
+        '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),        
       },
     );
   }
@@ -112,150 +119,3 @@ class BaseScreen extends StatelessWidget {
   }
 }
 
-/* =========================
-   メニュー（通常／裏）
-   ========================= */
-
-
-
-/* =========================
-   生成（通常／裏）※キャラなし
-   ========================= */
-
-
-
-
-
-/// 禁断の言い訳（裏）キャラなし・ハード系のみ
-class ForbiddenScreenUra extends StatelessWidget {
-  const ForbiddenScreenUra({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseScreen(children: [
-      // 背景（裏）
-      const Positioned.fill(
-        child: ImageAsset('assets/images/bg_dark_default.png'),
-      ),
-
-      // ブラウン管（裏：default）
-      const RelPositioned(
-        x: 0, y: 100, width: 1080, height: 810,
-        child: ImageAsset('assets/images/label_braun_frame_default.png'),
-      ),
-
-      // 音声トグル（右上）
-      const RelPositioned(
-        x: 786, y: 20, width: 272, height: 96,
-        child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
-      ),
-
-      // 戻る（上）→ 裏モード入力に戻る（遷移は後で）
-      const RelPositioned(
-        x: 52, y: 20, width: 238, height: 96,
-        child: ImageAsset('assets/images/btn_back_top_default.png'),
-      ),
-
-      // 入力欄（表示のみ）
-      const RelPositioned(
-        x: 0, y: 953, width: 1080, height: 282,
-        child: ImageAsset('assets/images/input_field.png'),
-      ),
-
-      // アナログメーター（禁断はMAX）
-      const RelPositioned(
-        x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_max.png'),
-      ),
-
-      // Ubixのお告げボタン（禁断用）
-      const RelPositioned(
-        x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_oracle_default.png'),
-      ),
-
-      // 戻る（下）→ 裏モード入力に戻る（遷移は後で）
-      const RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_back_bottom_default.png'),
-      ),
-
-      // シェア
-      const RelPositioned(
-        x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
-      ),
-    ]);
-  }
-}
-
-
-/// 解析モード結果（裏）キャラなし・ハード系のみ
-class AnalysisResultScreenUra extends StatelessWidget {
-  const AnalysisResultScreenUra({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseScreen(children: [
-      // 背景（裏）
-      const Positioned.fill(
-        child: ImageAsset('assets/images/bg_dark_default.png'),
-      ),
-
-      // ブラウン管（裏：default）
-      const RelPositioned(
-        x: 0, y: 100, width: 1080, height: 810,
-        child: ImageAsset('assets/images/label_braun_frame_default.png'),
-      ),
-
-      // 音声トグル
-      const RelPositioned(
-        x: 786, y: 20, width: 272, height: 96,
-        child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
-      ),
-
-      // 戻る（上）
-      const RelPositioned(
-        x: 52, y: 20, width: 238, height: 96,
-        child: ImageAsset('assets/images/btn_back_top_default.png'),
-      ),
-
-      // 入力欄（表示のみ）
-      const RelPositioned(
-        x: 0, y: 953, width: 1080, height: 282,
-        child: ImageAsset('assets/images/input_field.png'),
-      ),
-
-      // メーター（仮値：5）
-      const RelPositioned(
-        x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_5.png'),
-      ),
-
-      // Ubixのお告げボタン
-      const RelPositioned(
-        x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_oracle_default.png'),
-      ),
-
-      // 戻る（下）→ /menu/ura へ遷移
-      RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/menu/ura');
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
-          ),
-        ),
-      ),
-      // シェア
-      const RelPositioned(
-        x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
-      ),
-    ]);
-  }
-}

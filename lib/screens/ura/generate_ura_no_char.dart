@@ -41,10 +41,13 @@ class GenerateScreenUraNoChar extends StatelessWidget {
         x: 28, y: 1376, width: 372, height: 221,
         child: ImageAsset('assets/images/slider_level_normal.png'),
       ),
-      // 禁断ボタン（裏はアクティブ遷移先あり：後段で実装）
-      const RelPositioned(
+      // 禁断ボタン（裏はアクティブ遷移先あり：/forbidden/ura）
+      RelPositioned(
         x: 413, y: 1248, width: 260, height: 384,
-        child: ImageAsset('assets/images/btn_forbidden_default.png'),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, '/forbidden/ura'),
+          child: const ImageAsset('assets/images/btn_forbidden_default.png'),
+        ),
       ),
       // もう一度トライ
       const RelPositioned(

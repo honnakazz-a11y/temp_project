@@ -50,10 +50,18 @@ class ForbiddenScreenUraNoChar extends StatelessWidget {
         ),
       ),
 
-      // 戻る（下）→ 裏モード入力に戻る（遷移は後で）
-      const RelPositioned(
+      // 戻る（下）→ /input/ura へ即時遷移（正典：pushReplacementNamed）
+      RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_back_bottom_default.png'),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/input/ura');
+            },
+            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
+          ),
+        ),
       ),
 
       // シェア

@@ -13,6 +13,7 @@ part 'screens/ura/generate_ura_no_char.dart';
 part 'screens/ura/analysis_input_ura.dart';
 part 'screens/ura/analysis_result_ura.dart';
 part 'screens/ura/forbidden_ura_no_char.dart';
+part 'screens/oracle.dart';
 
 void main() => runApp(const TempProjectApp());
 
@@ -24,7 +25,7 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 初期表示は必要に応じて
-      home: const ForbiddenScreenUraNoChar(),
+      home: const MenuScreenUra(),
       routes: {
         '/opening': (context) => const SplashVideoScreen(), 
         '/input/normal': (context) => const InputScreenNormalNoChar(),
@@ -37,7 +38,8 @@ class TempProjectApp extends StatelessWidget {
         '/analysis/input/ura': (context) => const AnalysisInputScreenUra(),
         '/generate/normal': (context) => const GenerateScreenNoChar(),
         '/guide/ura': (context) => const GuideScreenUra(),
-        '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),        
+        '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),  
+        '/oracle': (context) => const OracleScreen(),
       },
     );
   }

@@ -42,9 +42,12 @@ class ForbiddenScreenUraNoChar extends StatelessWidget {
       ),
 
       // Ubixのお告げボタン（禁断用）
-      const RelPositioned(
+      RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_oracle_default.png'),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, '/oracle'),
+          child: const ImageAsset('assets/images/btn_oracle_default.png'),
+        ),
       ),
 
       // 戻る（下）→ 裏モード入力に戻る（遷移は後で）

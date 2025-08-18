@@ -74,14 +74,17 @@ class GenerateScreenNoChar extends StatelessWidget {
         x: 67, y: 1699, width: 946, height: 214,
         child: ImageAsset('assets/images/btn_tryagain_default.png'),
       ),
-      // 戻る（下）
+      // 下戻る（演出→約2秒後に /menu/normal へ）
       RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
+        x: 26, y: 1926, width: 500, height: 200, // 既存の座標/サイズをそのまま
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/menu/normal');
+              UbixEffects.showLineThenGo(
+                context,
+                toRoute: '/menu/normal',
+              );
             },
             child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
           ),

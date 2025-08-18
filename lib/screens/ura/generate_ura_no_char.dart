@@ -54,14 +54,17 @@ class GenerateScreenUraNoChar extends StatelessWidget {
         x: 67, y: 1699, width: 946, height: 214,
         child: ImageAsset('assets/images/btn_tryagain_default.png'),
       ),
-      // 戻る（下）→ /menu/ura へ即時遷移（挙動を元に戻す）
+      // 下戻る（演出→約2秒後に /menu/ura へ）
       RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
+        x: 26, y: 1926, width: 500, height: 200, // 既存の座標/サイズをそのまま
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/menu/ura');
+              UbixEffects.showLineThenGo(
+                context,
+                toRoute: '/menu/ura',
+              );
             },
             child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
           ),

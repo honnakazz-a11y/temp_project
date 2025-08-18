@@ -1,8 +1,8 @@
 part of '../../main.dart';
 
-/// 解析モード入力（裏）キャラなし・ハード系のみ
-class AnalysisInputScreenUra extends StatelessWidget {
-  const AnalysisInputScreenUra({super.key});
+/// 解析モード結果（裏）キャラなし・ハード系のみ
+class AnalysisResultScreenUraNoChar extends StatelessWidget {
+  const AnalysisResultScreenUraNoChar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,40 +36,36 @@ class AnalysisInputScreenUra extends StatelessWidget {
         ),
       ),
 
-      // 入力欄
+      // 入力欄（表示のみ）
       const RelPositioned(
         x: 0, y: 953, width: 1080, height: 282,
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // メーター（初期：0）
+      // メーター（仮値：5）
       const RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_0.png'),
+        child: ImageAsset('assets/images/meter_5.png'),
       ),
 
-      // 解析開始ボタン → /analysis/result へ遷移
+      // Ubixのお告げボタン
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/analysis/result');
-            },
-            child: const ImageAsset('assets/images/btn_analyze_default.png'),
-          ),
+        child: GestureDetector(
+          onTap: () => Navigator.pushNamed(context, '/oracle'),
+          child: const ImageAsset('assets/images/btn_oracle_default.png'),
         ),
       ),
 
-      // 戻る（下）→ /menu/ura へ即時遷移（演出なし）
+      // 戻る（下）→ オープニング（= home ルート）へ
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/menu/ura');
+              // TODO: 起動カウント +1（管理層が整ってから実装）
+              Navigator.of(context).pushReplacementNamed('/opening');
             },
             child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
           ),

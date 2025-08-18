@@ -10,8 +10,8 @@ part 'screens/normal/input_normal_nochar.dart';
 part 'screens/ura/input_ura_nochar.dart';
 part 'screens/normal/generate_normal_no_char.dart';
 part 'screens/ura/generate_ura_no_char.dart';
-part 'screens/ura/analysis_input_ura.dart';
-part 'screens/ura/analysis_result_ura.dart';
+part 'screens/ura/analysis_input_ura_nochar.dart';
+part 'screens/ura/analysis_result_ura_nochar.dart';
 part 'screens/ura/forbidden_ura_no_char.dart';
 part 'screens/oracle.dart';
 part 'helpers/ubix_effects.dart';
@@ -33,11 +33,11 @@ class TempProjectApp extends StatelessWidget {
         '/input/normal': (context) => const InputScreenNormalNoChar(),
         '/guide/normal': (context) => const GuideScreenNormal(),
         '/menu/normal': (context) => const MenuScreenNormal(),
-        '/analysis/result': (context) => const AnalysisResultScreenUra(),
+        '/analysis/result': (context) => const AnalysisResultScreenUraNoChar(),
         '/menu/ura': (context) => const MenuScreenUra(),
         '/input/ura': (context) => const InputScreenUraNoChar(),
         '/generate/ura': (context) => const GenerateScreenUraNoChar(),
-        '/analysis/input/ura': (context) => const AnalysisInputScreenUra(),
+        '/analysis/input/ura': (context) => const AnalysisInputScreenUraNoChar(),
         '/generate/normal': (context) => const GenerateScreenNoChar(),
         '/guide/ura': (context) => const GuideScreenUra(),
         '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),  

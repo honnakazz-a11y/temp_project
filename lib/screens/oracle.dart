@@ -23,10 +23,16 @@ class OracleScreen extends StatelessWidget {
         child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
       ),
 
-      // 戻る（上）※非アクティブ（触らない）
-      const RelPositioned(
+      // 戻る（上）→ /menu/ura（例外仕様：履歴無視で固定遷移）
+      RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: ImageAsset('assets/images/btn_back_top_default.png'),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () => Navigator.pushReplacementNamed(context, '/menu/ura'),
+            child: const ImageAsset('assets/images/btn_back_top_default.png'),
+          ),
+        ),
       ),
 
       // 入力欄は配置しない（禁断との差分：完全除外）

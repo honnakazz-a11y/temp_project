@@ -27,13 +27,7 @@ class GenerateScreenNoChar extends StatelessWidget {
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: () {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              } else {
-                Navigator.pushReplacementNamed(context, '/menu/normal');
-              }
-            },
+            onTap: () => NavHelper.backOrFallbackToMenu(context, isUra: false),
             child: const ImageAsset('assets/images/btn_back_top_default.png'),
           ),
         ),

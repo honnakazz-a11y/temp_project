@@ -29,7 +29,7 @@ class OracleScreen extends StatelessWidget {
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: () => Navigator.pushReplacementNamed(context, '/menu/ura'),
+            onTap: () => NavHelper.replaceToMenuUra(context),
             child: const ImageAsset('assets/images/btn_back_top_default.png'),
           ),
         ),

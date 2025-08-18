@@ -14,6 +14,8 @@ part 'screens/ura/analysis_input_ura.dart';
 part 'screens/ura/analysis_result_ura.dart';
 part 'screens/ura/forbidden_ura_no_char.dart';
 part 'screens/oracle.dart';
+part 'helpers/ubix_effects.dart';
+part 'helpers/navigation_helper.dart';
 
 void main() => runApp(const TempProjectApp());
 

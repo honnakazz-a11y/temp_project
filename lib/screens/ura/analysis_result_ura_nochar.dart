@@ -27,12 +27,12 @@ class AnalysisResultScreenUraNoChar extends StatelessWidget {
       // 戻る（上）＝ 基本動作（1つ前へ戻る）／スタック無し→ /menu/ura にフォールバック
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => NavHelper.backOrFallbackToMenu(context, isUra: true),
-            child: const ImageAsset('assets/images/btn_back_top_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: true),
+          semanticLabel: '上戻る',
+          width: 238, height: 96,
         ),
       ),
 

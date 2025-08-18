@@ -80,3 +80,6 @@ flutter:
     - assets/images/slider_level_normal.png
     - assets/images/slider_level_unko.png
     - assets/images/ubix_opening_static_6plus.png
+    - assets/videos/
+    - assets/se/
+    - assets/voice/

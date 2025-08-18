@@ -26,15 +26,14 @@ class ForbiddenScreenUraNoChar extends StatelessWidget {
       // 戻る（上）→ /input/ura（例外仕様：履歴無視で固定遷移）
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => NavHelper.replaceToInputUra(context),
-            child: const ImageAsset('assets/images/btn_back_top_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          onPressed: () => NavHelper.replaceToInputUra(context),
+          semanticLabel: '上戻る',
+          width: 238, height: 96,
         ),
       ),
-
       // 入力欄（表示のみ）
       const RelPositioned(
         x: 0, y: 953, width: 1080, height: 282,

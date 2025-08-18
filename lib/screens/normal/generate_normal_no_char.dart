@@ -24,12 +24,12 @@ class GenerateScreenNoChar extends StatelessWidget {
       // 戻る（上）＝ 基本動作（1つ前へ戻る）／スタック無し→ /menu/normal にフォールバック
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => NavHelper.backOrFallbackToMenu(context, isUra: false),
-            child: const ImageAsset('assets/images/btn_back_top_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: false),
+          semanticLabel: '上戻る',
+          width: 238, height: 96,
         ),
       ),
 
@@ -84,17 +84,12 @@ class GenerateScreenNoChar extends StatelessWidget {
       // 下戻る（演出→約2秒後に /menu/normal へ）
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200, // 既存の座標/サイズをそのまま
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              UbixEffects.showLineThenGo(
-                context,
-                toRoute: '/menu/normal',
-              );
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_bottom_default.png',
+          pressedAsset: 'assets/images/btn_back_bottom_pressed.png',
+          onPressed: () => UbixEffects.showLineThenGo(context, toRoute: '/menu/normal'),
+          semanticLabel: '下戻る',
+          width: 500, height: 200,
         ),
       ),
       // シェア

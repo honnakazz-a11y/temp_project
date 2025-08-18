@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter/services.dart';
 
 part 'screens/opening/splash_video_screen.dart';
 part 'screens/normal/guide_normal.dart';
@@ -16,6 +17,7 @@ part 'screens/ura/forbidden_ura_no_char.dart';
 part 'screens/oracle.dart';
 part 'helpers/ubix_effects.dart';
 part 'helpers/navigation_helper.dart';
+part 'widgets/ux_image_button.dart';
 
 void main() => runApp(const TempProjectApp());
 
@@ -27,7 +29,7 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 初期表示は必要に応じて
-      home: const MenuScreenUra(),
+      home: const MenuScreenNormal(),
       routes: {
         '/opening': (context) => const SplashVideoScreen(), 
         '/input/normal': (context) => const InputScreenNormalNoChar(),

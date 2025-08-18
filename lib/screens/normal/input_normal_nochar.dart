@@ -24,10 +24,16 @@ class InputScreenNormalNoChar extends StatelessWidget {
         child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
       ),
 
-      // 戻る（上）
-      const RelPositioned(
+      // 戻る（上）＝ 基本動作（1つ前へ戻る）／スタック無し→ /menu/normal にフォールバック
+      RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: ImageAsset('assets/images/btn_back_top_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: false),
+          semanticLabel: '上戻る',
+          width: 238, height: 96,
+        ),
       ),
 
       // 入力欄

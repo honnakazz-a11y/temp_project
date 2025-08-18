@@ -26,14 +26,15 @@ class OracleScreen extends StatelessWidget {
       // 戻る（上）→ /menu/ura（例外仕様：履歴無視で固定遷移）
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => NavHelper.replaceToMenuUra(context),
-            child: const ImageAsset('assets/images/btn_back_top_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          onPressed: () => NavHelper.replaceToMenuUra(context),
+          semanticLabel: '上戻る',
+          width: 238, height: 96,
         ),
       ),
+
 
       // 入力欄は配置しない（禁断との差分：完全除外）
 

@@ -1,7 +1,20 @@
 part of '../../main.dart';
 
-class ForbiddenScreenUraNoChar extends StatelessWidget {
+/// 禁断（裏）キャラなし
+class ForbiddenScreenUraNoChar extends StatefulWidget {
   const ForbiddenScreenUraNoChar({super.key});
+
+  @override
+  State<ForbiddenScreenUraNoChar> createState() => _ForbiddenScreenUraNoCharState();
+}
+
+class _ForbiddenScreenUraNoCharState extends State<ForbiddenScreenUraNoChar> {
+  @override
+  void initState() {
+    super.initState();
+    // 禁断＋裏テーマ素材のプリロード（チラつき防止）
+    AssetRegistry.precacheForbidden(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +36,18 @@ class ForbiddenScreenUraNoChar extends StatelessWidget {
         child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
       ),
 
-      // 戻る（上）→ /input/ura（例外仕様：履歴無視で固定遷移）
+      // 上戻る（例外仕様：常に /input/ura へ置換遷移）
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
         child: UxImageButton(
-          normalAsset: 'assets/images/btn_back_top_default.png',
-          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          normalAsset: Assets.img.button.backUpperNormal,
+          pressedAsset: Assets.img.button.backUpperPressed,
           onPressed: () => NavHelper.replaceToInputUra(context),
           semanticLabel: '上戻る',
           width: 238, height: 96,
         ),
       ),
+
       // 入力欄（表示のみ）
       const RelPositioned(
         x: 0, y: 953, width: 1080, height: 282,
@@ -46,30 +60,31 @@ class ForbiddenScreenUraNoChar extends StatelessWidget {
         child: ImageAsset('assets/images/meter_max.png'),
       ),
 
-      // Ubixのお告げボタン（禁断用）
+      // Ubixのお告げボタン → /oracle（既存どおり）
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/oracle'),
-          child: const ImageAsset('assets/images/btn_oracle_default.png'),
-        ),
-      ),
-
-      // 戻る（下）→ /input/ura へ即時遷移（正典：pushReplacementNamed）
-      RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/input/ura');
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
+            onTap: () => Navigator.pushNamed(context, '/oracle'),
+            child: const ImageAsset('assets/images/btn_oracle_default.png'),
           ),
         ),
       ),
 
-      // シェア
+      // 下戻る（正典：即時に /input/ura へ置換遷移）
+      RelPositioned(
+        x: 26, y: 1926, width: 500, height: 200,
+        child: UxImageButton(
+          normalAsset: Assets.img.button.backLowerNormal,
+          pressedAsset: Assets.img.button.backLowerPressed,
+          onPressed: () => NavHelper.replaceToInputUra(context),
+          semanticLabel: '下戻る',
+          width: 500, height: 200,
+        ),
+      ),
+
+      // シェア（表示のみ）
       const RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
         child: ImageAsset('assets/images/btn_share_default.png'),

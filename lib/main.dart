@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
+import 'constants/assets.dart';
+import 'helpers/asset_registry.dart';
 
 part 'screens/opening/splash_video_screen.dart';
 part 'screens/normal/guide_normal.dart';

@@ -1,8 +1,21 @@
 part of '../../main.dart';
 
 /// 解析モード入力（裏）キャラなし・ハード系のみ
-class AnalysisInputScreenUraNoChar extends StatelessWidget {
+class AnalysisInputScreenUraNoChar extends StatefulWidget {
   const AnalysisInputScreenUraNoChar({super.key});
+
+  @override
+  State<AnalysisInputScreenUraNoChar> createState() =>
+      _AnalysisInputScreenUraNoCharState();
+}
+
+class _AnalysisInputScreenUraNoCharState extends State<AnalysisInputScreenUraNoChar> {
+  @override
+  void initState() {
+    super.initState();
+    // 解析系アセットの事前読み込み（チラつき防止）
+    AssetRegistry.precacheAnalysis(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +41,8 @@ class AnalysisInputScreenUraNoChar extends StatelessWidget {
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
         child: UxImageButton(
-          normalAsset: 'assets/images/btn_back_top_default.png',
-          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          normalAsset: Assets.img.button.backUpperNormal,
+          pressedAsset: Assets.img.button.backUpperPressed,
           onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: true),
           semanticLabel: '上戻る',
           width: 238, height: 96,

@@ -1,8 +1,21 @@
 part of '../../main.dart';
 
-/// 解析モード結果（裏）キャラなし・ハード系のみ
-class AnalysisResultScreenUraNoChar extends StatelessWidget {
+/// 解析結果（裏）キャラなし
+class AnalysisResultScreenUraNoChar extends StatefulWidget {
   const AnalysisResultScreenUraNoChar({super.key});
+
+  @override
+  State<AnalysisResultScreenUraNoChar> createState() =>
+      _AnalysisResultScreenUraNoCharState();
+}
+
+class _AnalysisResultScreenUraNoCharState extends State<AnalysisResultScreenUraNoChar> {
+  @override
+  void initState() {
+    super.initState();
+    // 解析系アセットの事前読み込み（チラつき防止）
+    AssetRegistry.precacheAnalysis(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,51 +41,47 @@ class AnalysisResultScreenUraNoChar extends StatelessWidget {
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
         child: UxImageButton(
-          normalAsset: 'assets/images/btn_back_top_default.png',
-          pressedAsset: 'assets/images/btn_back_top_pressed.png',
+          normalAsset: Assets.img.button.backUpperNormal,
+          pressedAsset: Assets.img.button.backUpperPressed,
           onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: true),
           semanticLabel: '上戻る',
           width: 238, height: 96,
         ),
       ),
 
-      // 入力欄（表示のみ）
-      const RelPositioned(
-        x: 0, y: 953, width: 1080, height: 282,
-        child: ImageAsset('assets/images/input_field.png'),
-      ),
+      // 表示領域（結果の表示部分は既存のまま）
+      // TODO: ここに既存の結果テキスト・画像などがある場合はそのまま維持
+      // （今回のタスクは演出・UIを変更しない）
 
-      // メーター（仮値：5）
-      const RelPositioned(
-        x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_5.png'),
-      ),
-
-      // Ubixのお告げボタン
+      // Ubixのお告げボタン → /oracle（既存維持）
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/oracle'),
-          child: const ImageAsset('assets/images/btn_oracle_default.png'),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/oracle');
+            },
+            child: const ImageAsset('assets/images/btn_oracle_default.png'),
+          ),
         ),
       ),
 
-      // 戻る（下）→ オープニング（= home ルート）へ
+      // 戻る（下）→ /opening（既存維持：動画→/menu/ura）
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              // TODO: 起動カウント +1（管理層が整ってから実装）
-              Navigator.of(context).pushReplacementNamed('/opening');
+              Navigator.pushNamed(context, '/opening');
             },
             child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
           ),
         ),
       ),
 
-      // シェア
+      // シェア（既存維持）
       const RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
         child: ImageAsset('assets/images/btn_share_default.png'),

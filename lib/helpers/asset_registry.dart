@@ -16,7 +16,12 @@ class AssetRegistry {
     for (final frame in Assets.img.meter.frames) {
       await precacheImage(AssetImage(frame), context);
     }
-    // 生成系の他ボタンも必要に応じて追加
+    // === Level slider (kami / normal / unko) ===
+    await Future.wait([
+      precacheImage(AssetImage(Assets.img.level.trackKami), context),
+      precacheImage(AssetImage(Assets.img.level.trackNormal), context),
+      precacheImage(AssetImage(Assets.img.level.trackUnko), context),
+    ]);
   }
 
   static Future<void> precacheAnalysis(BuildContext context) async {

@@ -58,7 +58,13 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         x: 686, y: 1352, width: 388, height: 280,
         child: ImageAsset('assets/images/meter_5.png'),
       ),
-
+      
+      // スライダー（普通）
+      const RelPositioned(
+        x: 28, y: 1376, width: 372, height: 221,
+        child: ImageAsset('assets/images/slider_level_normal.png'),
+      ),
+      
       // 禁断ボタン（裏はアクティブ：/forbidden/ura）
       RelPositioned(
         x: 413, y: 1248, width: 260, height: 384,

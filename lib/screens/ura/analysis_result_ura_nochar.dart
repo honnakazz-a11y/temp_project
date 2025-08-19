@@ -49,9 +49,17 @@ class _AnalysisResultScreenUraNoCharState extends State<AnalysisResultScreenUraN
         ),
       ),
 
-      // 表示領域（結果の表示部分は既存のまま）
-      // TODO: ここに既存の結果テキスト・画像などがある場合はそのまま維持
-      // （今回のタスクは演出・UIを変更しない）
+      // 入力欄
+      const RelPositioned(
+        x: 0, y: 953, width: 1080, height: 282,
+        child: ImageAsset('assets/images/input_field.png'),
+      ),
+
+      // メーター（初期：0）
+      const RelPositioned(
+        x: 686, y: 1352, width: 388, height: 280,
+        child: ImageAsset('assets/images/meter_0.png'),
+      ),
 
       // Ubixのお告げボタン → /oracle（既存維持）
       RelPositioned(

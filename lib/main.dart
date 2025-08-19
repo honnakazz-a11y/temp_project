@@ -29,7 +29,7 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 初期表示は必要に応じて
-      home: const MenuScreenNormal(),
+      home: const MenuScreenUra(),
       routes: {
         '/opening': (context) => const SplashVideoScreen(), 
         '/input/normal': (context) => const InputScreenNormalNoChar(),

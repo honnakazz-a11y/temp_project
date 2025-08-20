@@ -1,25 +1,36 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
+
+// 集中定義・プリロード（import）
 import 'constants/assets.dart';
 import 'helpers/asset_registry.dart';
 
+// ===== このプロジェクトの「同一ライブラリ」ファイル（part） =====
 part 'screens/opening/splash_video_screen.dart';
+
 part 'screens/normal/guide_normal.dart';
-part 'screens/ura/guide_ura.dart';
 part 'screens/normal/menu_normal.dart';
-part 'screens/ura/menu_ura.dart';
 part 'screens/normal/input_normal_nochar.dart';
-part 'screens/ura/input_ura_nochar.dart';
 part 'screens/normal/generate_normal_no_char.dart';
+
+part 'screens/ura/guide_ura.dart';
+part 'screens/ura/menu_ura.dart';
+part 'screens/ura/input_ura_nochar.dart';
 part 'screens/ura/generate_ura_no_char.dart';
 part 'screens/ura/analysis_input_ura_nochar.dart';
 part 'screens/ura/analysis_result_ura_nochar.dart';
 part 'screens/ura/forbidden_ura_no_char.dart';
+
 part 'screens/oracle.dart';
-part 'helpers/ubix_effects.dart';
+
 part 'helpers/navigation_helper.dart';
+part 'helpers/ubix_effects.dart';
+
 part 'widgets/ux_image_button.dart';
+part 'widgets/level_slider.dart';
+// ================================================================
 
 void main() => runApp(const TempProjectApp());
 
@@ -30,27 +41,38 @@ class TempProjectApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // 初期表示は必要に応じて
+      // 必要に応じて初期画面を切り替え
       home: const MenuScreenUra(),
       routes: {
-        '/opening': (context) => const SplashVideoScreen(), 
+        '/opening': (context) => const SplashVideoScreen(),
+
+        // 入力
         '/input/normal': (context) => const InputScreenNormalNoChar(),
-        '/guide/normal': (context) => const GuideScreenNormal(),
-        '/menu/normal': (context) => const MenuScreenNormal(),
-        '/analysis/result': (context) => const AnalysisResultScreenUraNoChar(),
-        '/menu/ura': (context) => const MenuScreenUra(),
-        '/input/ura': (context) => const InputScreenUraNoChar(),
-        '/generate/ura': (context) => const GenerateScreenUraNoChar(),
+        '/input/ura':    (context) => const InputScreenUraNoChar(),
+
+        // 生成
+        '/generate/normal': (context) => const GenerateScreenNormalNoChar(),
+        '/generate/ura':    (context) => const GenerateScreenUraNoChar(),
+
+        // 解析（NoChar）
         '/analysis/input/ura': (context) => const AnalysisInputScreenUraNoChar(),
-        '/generate/normal': (context) => const GenerateScreenNoChar(),
-        '/guide/ura': (context) => const GuideScreenUra(),
-        '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),  
-        '/oracle': (context) => const OracleScreen(),
+        '/analysis/result':    (context) => const AnalysisResultScreenUraNoChar(),
+
+        // 禁断・お告げ
+        '/forbidden/ura': (context) => const ForbiddenScreenUraNoChar(),
+        '/oracle':        (context) => const OracleScreen(),
+
+        // メニュー
+        '/menu/normal': (context) => const MenuScreenNormal(),
+        '/menu/ura':    (context) => const MenuScreenUra(),
+
+        // ガイド
+        '/guide/normal': (context) => const GuideScreenNormal(),
+        '/guide/ura':    (context) => const GuideScreenUra(),
       },
     );
   }
 }
-
 /* =========================
    共通ユーティリティ
    ========================= */

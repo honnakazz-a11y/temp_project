@@ -2,6 +2,31 @@ part of '../main.dart';
 
 enum LevelTier { divine, normal, poop }
 
+extension LevelTierX on LevelTier {
+  String get name {
+    switch (this) {
+      case LevelTier.divine:
+        return 'divine';
+      case LevelTier.normal:
+        return 'normal';
+      case LevelTier.poop:
+        return 'poop';
+    }
+  }
+
+  static LevelTier fromName(String? name) {
+    switch (name) {
+      case 'divine':
+        return LevelTier.divine;
+      case 'poop':
+        return LevelTier.poop;
+      case 'normal':
+      default:
+        return LevelTier.normal;
+    }
+  }
+}
+
 class LevelSlider extends StatefulWidget {
   const LevelSlider({
     super.key,

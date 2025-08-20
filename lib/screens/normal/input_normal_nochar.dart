@@ -1,8 +1,16 @@
 part of '../../main.dart';
 
 /// 入力（通常）キャラなし・ハード系のみ
-class InputScreenNormalNoChar extends StatelessWidget {
+class InputScreenNormalNoChar extends StatefulWidget {
   const InputScreenNormalNoChar({super.key});
+
+  @override
+  State<InputScreenNormalNoChar> createState() => _InputScreenNormalNoCharState();
+}
+
+class _InputScreenNormalNoCharState extends State<InputScreenNormalNoChar> {
+  // 既定は normal
+  LevelTier currentTier = LevelTier.normal;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,7 @@ class InputScreenNormalNoChar extends StatelessWidget {
         child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
       ),
 
-      // 戻る（上）＝ 基本動作（1つ前へ戻る）／スタック無し→ /menu/normal にフォールバック
+      // 戻る（上）
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
         child: UxImageButton(
@@ -42,45 +50,40 @@ class InputScreenNormalNoChar extends StatelessWidget {
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // スライダー（初期：普通）
-      const RelPositioned(
+      // LevelSlider（現在値はStateで保持）
+      RelPositioned(
         x: 28, y: 1376, width: 372, height: 221,
-        child: ImageAsset('assets/images/slider_level_normal.png'),
+        child: LevelSlider(
+          value: currentTier,
+          onChanged: (tier) => setState(() => currentTier = tier),
+          isUra: false,
+        ),
       ),
 
-      // アナログメーター（初期：0）
+      // アナログメーター（仮）
       const RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
         child: ImageAsset('assets/images/meter_0.png'),
       ),
 
-      // 言い訳生成ボタン → /generate/normal へ遷移
+      // 生成 → /generate/normal（level を arguments で渡す）
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/generate/normal');
+              Navigator.pushNamed(
+                context,
+                '/generate/normal',
+                arguments: {'level': currentTier.name}, // 'divine'|'normal'|'poop'
+              );
             },
             child: const ImageAsset('assets/images/btn_generate_default.png'),
           ),
         ),
       ),
 
-      // 戻る（下）→ /menu/normal へ遷移
-      RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/menu/normal');
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
-          ),
-        ),
-      ),
       // シェア
       const RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,

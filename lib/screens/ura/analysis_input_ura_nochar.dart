@@ -75,19 +75,7 @@ class _AnalysisInputScreenUraNoCharState extends State<AnalysisInputScreenUraNoC
         ),
       ),
 
-      // 戻る（下）→ /menu/ura へ即時遷移（演出なし）
-      RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/menu/ura');
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
-          ),
-        ),
-      ),
+      // 【RG3-2k】下戻るは撤去（何も置かない）
 
       // シェア
       const RelPositioned(

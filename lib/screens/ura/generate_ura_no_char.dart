@@ -3,16 +3,20 @@ part of '../../main.dart';
 /// 生成（裏）キャラなし
 class GenerateScreenUraNoChar extends StatefulWidget {
   const GenerateScreenUraNoChar({super.key});
+
   @override
   State<GenerateScreenUraNoChar> createState() => _GenerateScreenUraNoCharState();
 }
 
 class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
+  late LevelTier currentTier;
+
   @override
-  void initState() {
-    super.initState();
-    // 裏生成用の素材を事前読み込み（メーター含む）
-    AssetRegistry.precacheGenerate(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as Map?;
+    final tierStr = args?['level'] as String?;
+    currentTier = LevelTierX.fromName(tierStr);
   }
 
   @override
@@ -23,27 +27,37 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         child: ImageAsset('assets/images/bg_dark_default.png'),
       ),
 
-      // ブラウン管（裏：default）
+      // ブラウン管（裏）
       const RelPositioned(
         x: 0, y: 100, width: 1080, height: 810,
         child: ImageAsset('assets/images/label_braun_frame_default.png'),
       ),
 
-      // 音声トグル（右上）
+      // 音声トグル
       const RelPositioned(
         x: 786, y: 20, width: 272, height: 96,
         child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
       ),
 
-      // 戻る（上）＝ 基本動作（1つ前）／スタック無し→ /menu/ura にフォールバック
+      // 戻る（上）
       RelPositioned(
         x: 52, y: 20, width: 238, height: 96,
         child: UxImageButton(
-          normalAsset: Assets.img.button.backUpperNormal,
-          pressedAsset: Assets.img.button.backUpperPressed,
+          normalAsset: 'assets/images/btn_back_top_default.png',
+          pressedAsset: 'assets/images/btn_back_top_pressed.png',
           onPressed: () => NavHelper.backOrFallbackToMenu(context, isUra: true),
           semanticLabel: '上戻る',
           width: 238, height: 96,
+        ),
+      ),
+
+      // LevelSlider（引き継いだtierを初期表示）
+      RelPositioned(
+        x: 28, y: 1376, width: 372, height: 221,
+        child: LevelSlider(
+          value: currentTier,
+          onChanged: (tier) => setState(() => currentTier = tier),
+          isUra: true,
         ),
       ),
 
@@ -53,16 +67,10 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // アナログメーター（例：5）
+      // アナログメーター（仮）
       const RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_5.png'),
-      ),
-      
-      // スライダー（普通）
-      const RelPositioned(
-        x: 28, y: 1376, width: 372, height: 221,
-        child: ImageAsset('assets/images/slider_level_normal.png'),
+        child: ImageAsset('assets/images/meter_0.png'),
       ),
       
       // 禁断ボタン（裏はアクティブ：/forbidden/ura）

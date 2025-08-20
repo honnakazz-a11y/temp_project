@@ -10,18 +10,38 @@ class GenerateScreenNormalNoChar extends StatefulWidget {
 
 class _GenerateScreenNormalNoCharState extends State<GenerateScreenNormalNoChar> {
   late LevelTier currentTier;
+  
+  bool _didPrecache = false;
+  
+int _pickBaseForNormal(LevelTier tier) {
+  final rnd = [0, 1]..shuffle(); // 乱数用（0 or 1）
+  switch (tier) {
+    case LevelTier.divine: // 神
+      return rnd.first == 0 ? 5 : 7;
+    case LevelTier.normal: // 普通
+      return rnd.first == 0 ? 1 : 3;
+    case LevelTier.poop:   // うんこ
+      return rnd.first == 0 ? 7 : 9;
+  }
+}
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final args = ModalRoute.of(context)?.settings.arguments as Map?;
-    final tierStr = args?['level'] as String?;
-    currentTier = LevelTierX.fromName(tierStr); // 未指定→normal
+void didChangeDependencies() {
+  super.didChangeDependencies();
+  final args = ModalRoute.of(context)?.settings.arguments as Map?;
+  final tierStr = args?['level'] as String?;
+  currentTier = LevelTierX.fromName(tierStr); // 未指定→normal
+
+  if (!_didPrecache) {
+    _didPrecache = true;
+    AssetRegistry.precacheGenerate(context); // メーター＆スライダー画像を事前読込
   }
+}
 
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(children: [
+      // ← この行の直後に追加
+      return BaseScreen(children: [
       // 背景（通常）
       const Positioned.fill(
         child: ImageAsset('assets/images/bg_main_default.png'),
@@ -67,10 +87,13 @@ class _GenerateScreenNormalNoCharState extends State<GenerateScreenNormalNoChar>
         ),
       ),
 
-      // アナログメーター（仮：0）
-      const RelPositioned(
+      // アナログメーター（JitteredFrame：常時プルプル）
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_0.png'),
+        child: JitteredFrame(
+          baseIndex: _pickBaseForNormal(currentTier),
+          mode: JitterMode.normal,
+        ),
       ),
 
       // 禁断（仮ダイアログ：課金誘導の簡易演出）

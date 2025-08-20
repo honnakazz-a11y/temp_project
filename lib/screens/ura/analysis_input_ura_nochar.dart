@@ -56,9 +56,12 @@ class _AnalysisInputScreenUraNoCharState extends State<AnalysisInputScreenUraNoC
       ),
 
       // メーター（初期：0）
-      const RelPositioned(
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_0.png'),
+        child: JitteredFrame(
+          baseIndex: 0, // TODO: 入力文字数や審問結果に応じて 0/1/3/5/7 に丸める
+          mode: JitterMode.normal,
+        ),
       ),
 
       // 解析開始ボタン → /analysis/result へ遷移

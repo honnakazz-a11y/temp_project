@@ -19,6 +19,10 @@ class _AnalysisResultScreenUraNoCharState extends State<AnalysisResultScreenUraN
 
   @override
   Widget build(BuildContext context) {
+    // ← この行の直後に追加
+    final candidates = [0, 1, 3, 5, 7, 9]; // 仕様：0〜9帯のうち maxは使わない
+    candidates.shuffle();
+    final int analysisBase = candidates.first;
     return BaseScreen(children: [
       // 背景（裏）
       const Positioned.fill(
@@ -55,10 +59,13 @@ class _AnalysisResultScreenUraNoCharState extends State<AnalysisResultScreenUraN
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // メーター（初期：0）
-      const RelPositioned(
+     // アナログメーター（解析：0/1/3/5/7/9のいずれかにランダム）
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_0.png'),
+        child: JitteredFrame(
+          baseIndex: analysisBase,
+          mode: JitterMode.normal,
+        ),
       ),
 
       // Ubixのお告げボタン → /oracle（既存維持）

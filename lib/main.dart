@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+import 'dart:async';
+import 'widgets/jittered_frame.dart';
 
 // 集中定義・プリロード（import）
 import 'constants/assets.dart';
@@ -42,7 +44,7 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 必要に応じて初期画面を切り替え
-      home: const MenuScreenUra(),
+      home: const MenuScreenNormal(),
       routes: {
         '/opening': (context) => const SplashVideoScreen(),
 

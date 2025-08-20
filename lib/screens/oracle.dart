@@ -18,7 +18,10 @@ class _OracleScreenState extends State<OracleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(children: [
+    // ← この行の直後に追加
+    final candidates = [5, 7, 9]; // 仕様：5/7/9帯から
+    candidates.shuffle();
+    final int oracleBase = candidates.first;    return BaseScreen(children: [
       // 背景（裏）
       const Positioned.fill(
         child: ImageAsset('assets/images/bg_dark_default.png'),
@@ -50,10 +53,13 @@ class _OracleScreenState extends State<OracleScreen> {
 
       // 入力欄は置かない（Oracleは枠のみ）
 
-      // アナログメーター（枠の統一感を維持：例としてMAX）
-      const RelPositioned(
+      // アナログメーター（お告げ：5/7/9帯からランダム）
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_max.png'),
+        child: JitteredFrame(
+          baseIndex: oracleBase,
+          mode: JitterMode.normal,
+        ),
       ),
 
       // 「Ubixのお告げ」ボタン（Oracleでは非アクティブ）※onTapなし

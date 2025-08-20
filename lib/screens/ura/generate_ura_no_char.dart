@@ -21,6 +21,15 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
 
   @override
   Widget build(BuildContext context) {
+    // ← この行の直後に追加
+    final int baseForNormal = () {
+      switch (currentTier) {
+        case LevelTier.divine: return 3;
+        case LevelTier.normal: return 5;
+        case LevelTier.poop:   return 9;
+      }
+    }();
+
     return BaseScreen(children: [
       // 背景（裏）
       const Positioned.fill(
@@ -67,10 +76,13 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // アナログメーター（仮）
-      const RelPositioned(
+      // アナログメーター（JitteredFrame：常時プルプル）
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_0.png'),
+        child: JitteredFrame(
+          baseIndex: baseForNormal,
+          mode: JitterMode.normal,
+        ),
       ),
       
       // 禁断ボタン（裏はアクティブ：/forbidden/ura）

@@ -54,10 +54,13 @@ class _ForbiddenScreenUraNoCharState extends State<ForbiddenScreenUraNoChar> {
         child: ImageAsset('assets/images/input_field.png'),
       ),
 
-      // アナログメーター（禁断はMAX）
-      const RelPositioned(
+      // アナログメーター（禁断：max帯を2点往復）
+      RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
-        child: ImageAsset('assets/images/meter_max.png'),
+        child: JitteredFrame(
+          baseIndex: 16,
+          mode: JitterMode.max,
+        ),
       ),
 
       // Ubixのお告げボタン → /oracle（既存どおり）

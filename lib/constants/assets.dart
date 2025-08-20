@@ -36,8 +36,26 @@ class _Button {
 }
 
 class _Meter {
-  List<String> get frames =>
-      List.generate(18, (i) => 'assets/images/meter_${i + 1}.png');
+  List<String> get frames => const [
+    'assets/images/meter_0.png',
+    'assets/images/meter_1_m1.png',
+    'assets/images/meter_1_p1.png',
+    'assets/images/meter_1.png',
+    'assets/images/meter_3_m1.png',
+    'assets/images/meter_3_p1.png',
+    'assets/images/meter_3.png',
+    'assets/images/meter_5_m1.png',
+    'assets/images/meter_5_p1.png',
+    'assets/images/meter_5.png',
+    'assets/images/meter_7_m1.png',
+    'assets/images/meter_7_p1.png',
+    'assets/images/meter_7.png',
+    'assets/images/meter_9_m1.png',
+    'assets/images/meter_9_p1.png',
+    'assets/images/meter_9.png',
+    'assets/images/meter_max_p1.png',
+    'assets/images/meter_max.png',
+  ];
 }
 
 class _Ura {

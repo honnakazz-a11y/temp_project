@@ -41,9 +41,19 @@ class GuideScreenNormal extends StatelessWidget {
       ),
 
       // シェア
-      const RelPositioned(
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

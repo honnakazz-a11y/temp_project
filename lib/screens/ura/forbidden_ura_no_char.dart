@@ -9,13 +9,18 @@ class ForbiddenScreenUraNoChar extends StatefulWidget {
 }
 
 class _ForbiddenScreenUraNoCharState extends State<ForbiddenScreenUraNoChar> {
+   bool _oracleLatched = false;
+   bool _didPrecache = false;
+   
   @override
-  void initState() {
-    super.initState();
-    // 禁断＋裏テーマ素材のプリロード（チラつき防止）
-    AssetRegistry.precacheForbidden(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_didPrecache) {
+      _didPrecache = true;
+      AssetRegistry.precacheForbidden(context);
+    }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return BaseScreen(children: [
@@ -66,15 +71,20 @@ class _ForbiddenScreenUraNoCharState extends State<ForbiddenScreenUraNoChar> {
       // Ubixのお告げボタン → /oracle（既存どおり）
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => Navigator.pushNamed(context, '/oracle'),
-            child: const ImageAsset('assets/images/btn_oracle_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: _oracleLatched
+              ? 'assets/images/btn_oracle_pressed.png' // 押したら固定
+              : 'assets/images/btn_oracle_default.png',
+          pressedAsset: 'assets/images/btn_oracle_pressed.png',
+          onPressed: () {
+            setState(() => _oracleLatched = true); // 一度押したら固定
+            Navigator.pushNamed(context, '/oracle');
+          },
+          semanticLabel: 'Ubixのお告げ',
+          width: 946, height: 214,
         ),
       ),
-
+      
       // 下戻る（正典：即時に /input/ura へ置換遷移）
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
@@ -88,9 +98,19 @@ class _ForbiddenScreenUraNoCharState extends State<ForbiddenScreenUraNoChar> {
       ),
 
       // シェア（表示のみ）
-      const RelPositioned(
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

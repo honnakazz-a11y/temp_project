@@ -31,6 +31,7 @@ part 'helpers/navigation_helper.dart';
 part 'helpers/ubix_effects.dart';
 
 part 'widgets/ux_image_button.dart';
+part 'widgets/ux_toggle_image_button.dart';
 part 'widgets/level_slider.dart';
 // ================================================================
 
@@ -44,7 +45,7 @@ class TempProjectApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // 必要に応じて初期画面を切り替え
-      home: const MenuScreenNormal(),
+      home: const MenuScreenUra(),
       routes: {
         '/opening': (context) => const SplashVideoScreen(),
 

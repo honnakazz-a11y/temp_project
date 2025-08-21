@@ -65,7 +65,7 @@ class _OracleScreenState extends State<OracleScreen> {
       // 「Ubixのお告げ」ボタン（Oracleでは非アクティブ）※onTapなし
       const RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_oracle_default.png'),
+        child: ImageAsset('assets/images/btn_oracle_pressed.png'),
       ),
 
       // 下戻る（例外仕様：常に /menu/ura へ置換遷移）
@@ -80,10 +80,20 @@ class _OracleScreenState extends State<OracleScreen> {
         ),
       ),
 
-      // シェア（表示のみ）
-      const RelPositioned(
+      // シェア（ダミー）
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

@@ -5,6 +5,7 @@ class MenuScreenUra extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AssetRegistry.precacheCommon(context);
     return BaseScreen(children: [
       // 背景（裏）
       const Positioned.fill(
@@ -23,69 +24,69 @@ class MenuScreenUra extends StatelessWidget {
       // 戻る（下）→ 仮ダイアログ表示（遷移なし）
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              showDialog(
-                context: context,
-               builder: (context) => AlertDialog(
-                  content: const Text('戻れませんよ？'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context), // 閉じるだけ
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: const ImageAsset('assets/images/btn_back_bottom_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_back_bottom_default.png',
+          pressedAsset: 'assets/images/btn_back_bottom_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('戻れませんよ？')),
+            );
+          },
+          semanticLabel: '下戻る（メニュー・無効）',
+          width: 500, height: 200,
         ),
       ),
+      
       // シェア
-      const RelPositioned(
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            // 将来はシェア機能に置き換え
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
+      
       // 言い訳を作ってもらう → /input/ura へ遷移
       RelPositioned(
         x: 67, y: 987, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/input/ura');
-            },
-            child: const ImageAsset('assets/images/btn_start_generate_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_start_generate_default.png',
+          pressedAsset: 'assets/images/btn_start_generate_pressed.png',
+          onPressed: () => Navigator.pushNamed(context, '/input/ura'),
+          semanticLabel: '言い訳を作ってもらう（入力へ）',
+          width: 946, height: 214,
         ),
       ),
+      
       // 言い訳を解析してもらう → /analysis/input/ura へ遷移
       RelPositioned(
         x: 67, y: 1343, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/analysis/input/ura');
-            },
-            child: const ImageAsset('assets/images/btn_start_analysis_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_start_analysis_default.png',
+          pressedAsset: 'assets/images/btn_start_analysis_pressed.png',
+          onPressed: () => Navigator.pushNamed(context, '/analysis/input/ura'),
+          semanticLabel: '言い訳を解析してもらう（解析入力へ）',
+          width: 946, height: 214,
         ),
       ),
+
       // 使い方ガイド → /guide/ura へ遷移
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/guide/ura');
-            },
-            child: const ImageAsset('assets/images/btn_guide_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_guide_default.png',
+          pressedAsset: 'assets/images/btn_guide_pressed.png',
+          onPressed: () => Navigator.pushNamed(context, '/guide/ura'),
+          semanticLabel: '使い方ガイド',
+          width: 946, height: 214,
         ),
       ),
     ]);

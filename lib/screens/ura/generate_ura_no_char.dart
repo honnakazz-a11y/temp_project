@@ -10,7 +10,9 @@ class GenerateScreenUraNoChar extends StatefulWidget {
 
 class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
   late LevelTier currentTier;
-
+  
+  bool _forbiddenLatched = false; 
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -85,24 +87,39 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         ),
       ),
       
-      // 禁断ボタン（裏はアクティブ：/forbidden/ura）
+      // 禁断（裏）→ /forbidden/ura へ。押下後は押下見た目を維持（ラッチ）
       RelPositioned(
         x: 413, y: 1248, width: 260, height: 384,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () => Navigator.pushNamed(context, '/forbidden/ura'),
-            child: const ImageAsset('assets/images/btn_forbidden_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: _forbiddenLatched
+              ? 'assets/images/btn_forbidden_pressed.png'
+              : 'assets/images/btn_forbidden_default.png',
+          pressedAsset: 'assets/images/btn_forbidden_pressed.png',
+          onPressed: () {
+            setState(() => _forbiddenLatched = true);
+            Navigator.pushNamed(context, '/forbidden/ura');
+          },
+          semanticLabel: '禁断',
+          width: 260, height: 384,
         ),
       ),
-
       // もう一度トライ（表示のみ）
-      const RelPositioned(
+      RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_tryagain_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_tryagain_default.png',
+          pressedAsset: 'assets/images/btn_tryagain_pressed.png',
+          onPressed: () {
+            Navigator.pushReplacementNamed(
+              context,
+              '/generate/ura',
+              arguments: {'level': currentTier.name},
+            );
+          },
+          semanticLabel: 'もう一度トライ',
+          width: 946, height: 214,
+        ),
       ),
-
       // 戻る（下）：RG3-1 演出 → 約2秒後に /menu/ura
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
@@ -115,10 +132,20 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         ),
       ),
 
-      // シェア（表示のみ）
-      const RelPositioned(
+      // シェア（ダミー）
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

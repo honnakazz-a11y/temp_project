@@ -69,28 +69,38 @@ class _InputScreenNormalNoCharState extends State<InputScreenNormalNoChar> {
         ),
       ),
 
-      // 生成 → /generate/normal（level を arguments で渡す）
+      // 言い訳爆誕（/generate/normal へ、tier 引き継ぎは現状どおり）
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/generate/normal',
-                arguments: {'level': currentTier.name}, // 'divine'|'normal'|'poop'
-              );
-            },
-            child: const ImageAsset('assets/images/btn_generate_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_generate_default.png',
+          pressedAsset: 'assets/images/btn_generate_pressed.png',
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              '/generate/normal',
+              arguments: {'level': currentTier.name},
+            );
+          },
+          semanticLabel: '言い訳爆誕',
+          width: 946, height: 214,
         ),
       ),
 
-      // シェア
-      const RelPositioned(
+      // シェア（ダミー）
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

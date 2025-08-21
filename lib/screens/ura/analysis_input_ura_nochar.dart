@@ -67,24 +67,32 @@ class _AnalysisInputScreenUraNoCharState extends State<AnalysisInputScreenUraNoC
       // 解析開始ボタン → /analysis/result へ遷移
       RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/analysis/result');
-            },
-            child: const ImageAsset('assets/images/btn_analyze_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_analyze_default.png',
+          pressedAsset: 'assets/images/btn_analyze_pressed.png',
+          onPressed: () {
+            Navigator.pushNamed(context, '/analysis/result');
+          },
+          semanticLabel: '解析開始',
+          width: 946, height: 214,
         ),
       ),
 
-      // 【RG3-2k】下戻るは撤去（何も置かない）
-
       // シェア
-      const RelPositioned(
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
-      ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
+      ),  
     ]);
   }
 }

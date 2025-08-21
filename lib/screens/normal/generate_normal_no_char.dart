@@ -96,41 +96,46 @@ void didChangeDependencies() {
         ),
       ),
 
-      // 禁断（仮ダイアログ：課金誘導の簡易演出）
+      // 禁断
       RelPositioned(
         x: 413, y: 1248, width: 260, height: 384,
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  content: const Text('アップグレード後にご利用になれます。今すぐアップグレードする？'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context), // 閉じるだけ（導線はまだ実装しない）
-                      child: const Text('Yes'),
-                    ),
-                    TextButton(
-                      onPressed: () => Navigator.pop(context), // 閉じるだけ
-                      child: const Text('No'),
-                    ),
-                  ],
-                ),
-              );
-            },
-            child: const ImageAsset('assets/images/btn_forbidden_default.png'),
-          ),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_forbidden_default.png',
+          pressedAsset: 'assets/images/btn_forbidden_pressed.png',
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: const Text('アップグレード後にご利用になれます。今すぐアップグレードする？'),
+                actions: [
+                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Yes')),
+                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('No')),
+                ],
+              ),
+            );
+          },
+          semanticLabel: '禁断の言い訳（準備中）',
+          width: 260, height: 384,
         ),
       ),
-
+      
       // もう一度トライ（見た目のみ・遷移なし）
-      const RelPositioned(
+      RelPositioned(
         x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_tryagain_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_tryagain_default.png',
+          pressedAsset: 'assets/images/btn_tryagain_pressed.png',
+          onPressed: () {
+            Navigator.pushReplacementNamed(
+              context,
+              '/generate/normal',
+              arguments: {'level': currentTier.name},
+            );
+          },
+          semanticLabel: 'もう一度トライ',
+          width: 946, height: 214,
+        ),
       ),
-
       // 戻る（下）＝ Ubix演出 → 約2秒後に /menu/normal へ
       RelPositioned(
         x: 26, y: 1926, width: 500, height: 200,
@@ -143,10 +148,20 @@ void didChangeDependencies() {
         ),
       ),
 
-      // シェア（見た目のみ）
-      const RelPositioned(
+      // シェア（ダミー）
+      RelPositioned(
         x: 550, y: 1926, width: 500, height: 200,
-        child: ImageAsset('assets/images/btn_share_default.png'),
+        child: UxImageButton(
+          normalAsset: 'assets/images/btn_share_default.png',
+          pressedAsset: 'assets/images/btn_share_pressed.png',
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('準備中です')),
+            );
+          },
+          semanticLabel: 'シェア（準備中）',
+          width: 500, height: 200,
+        ),
       ),
     ]);
   }

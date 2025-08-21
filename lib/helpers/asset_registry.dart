@@ -1,22 +1,32 @@
+// lib/helpers/asset_registry.dart
 import 'package:flutter/widgets.dart';
 import '../constants/assets.dart';
 
 class AssetRegistry {
   AssetRegistry._();
 
+  /// 共通：戻る系・シェアなど（どの画面でも使う最低限）
   static Future<void> precacheCommon(BuildContext context) async {
-    // 戻るボタン系（上・下）
+    // 戻る（上/下）
     await precacheImage(AssetImage(Assets.img.button.backUpperNormal), context);
     await precacheImage(AssetImage(Assets.img.button.backUpperPressed), context);
     await precacheImage(AssetImage(Assets.img.button.backLowerNormal), context);
     await precacheImage(AssetImage(Assets.img.button.backLowerPressed), context);
+
+    // シェア
+    await precacheImage(const AssetImage('assets/images/btn_share_default.png'), context);
+    await precacheImage(const AssetImage('assets/images/btn_share_pressed.png'), context);
+
+    // （必要に応じて）お告げ
+    await precacheImage(const AssetImage('assets/images/btn_oracle_default.png'), context);
+    await precacheImage(const AssetImage('assets/images/btn_oracle_pressed.png'), context);
   }
 
-  /// 生成画面系（通常/裏 共通）＋メーター18枚＋レベルスライダー
+  /// 生成画面用：共通＋メーター全フレーム＋レベルスライダー
   static Future<void> precacheGenerate(BuildContext context) async {
     await precacheCommon(context);
 
-    // メーター18枚を一括プリロード（framesに統一）
+    // メーター18枚
     for (final p in Assets.img.meter.frames) {
       await precacheImage(AssetImage(p), context);
     }
@@ -29,25 +39,21 @@ class AssetRegistry {
     ]);
   }
 
-  /// 解析系で必要なプリロード（必要に応じて拡張）
+  /// 解析系で使うもの（共通＋メーター）
   static Future<void> precacheAnalysis(BuildContext context) async {
     await precacheCommon(context);
-
-    // メーター（解析でも使うため、全フレーム）
     for (final p in Assets.img.meter.frames) {
       await precacheImage(AssetImage(p), context);
     }
   }
 
-  /// 禁断/裏テーマなど
+  /// 禁断/裏テーマ（共通＋裏背景＋CRTオーバーレイ＋メーター）
   static Future<void> precacheForbidden(BuildContext context) async {
     await precacheCommon(context);
 
-    // 裏テーマ背景・オーバーレイ
     await precacheImage(AssetImage(Assets.img.ura.bg), context);
     await precacheImage(AssetImage(Assets.img.ura.crtOverlay), context);
 
-    // メーター（禁断=MAX帯、ただし今は全フレームまとめて）
     for (final p in Assets.img.meter.frames) {
       await precacheImage(AssetImage(p), context);
     }

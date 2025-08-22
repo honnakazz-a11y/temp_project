@@ -1,0 +1,23 @@
+lib/helpers/navigation_helper.dart:10:    Navigator.pushReplacementNamed(context, '/menu/normal');
+lib/helpers/navigation_helper.dart:14:    Navigator.pushReplacementNamed(context, '/input/ura');
+lib/helpers/navigation_helper.dart:22:      Navigator.pushReplacementNamed(context, isUra ? '/menu/ura' : '/menu/normal');
+lib/helpers/navigation_helper.dart:6:    Navigator.pushReplacementNamed(context, '/menu/ura');
+lib/helpers/ubix_effects.dart:41:      Navigator.pushReplacementNamed(context, toRoute);
+lib/main.dart:49:      routes: {
+lib/screens/normal/generate_normal_no_char.dart:129:            Navigator.pushReplacementNamed(
+lib/screens/normal/guide_normal.dart:36:              Navigator.pushNamed(context, '/menu/normal');
+lib/screens/normal/input_normal_nochar.dart:79:            Navigator.pushNamed(
+lib/screens/normal/menu_normal.dart:121:          onPressed: () => Navigator.pushNamed(context, '/guide/normal'),
+lib/screens/normal/menu_normal.dart:80:          onPressed: () => Navigator.pushNamed(context, '/input/normal'),
+lib/screens/opening/splash_video_screen.dart:17:    Navigator.of(context).pushReplacementNamed('/menu/ura');
+lib/screens/ura/analysis_input_ura_nochar.dart:74:            Navigator.pushNamed(context, '/analysis/result');
+lib/screens/ura/analysis_result_ura_nochar.dart:80:            Navigator.pushNamed(context, '/oracle');
+lib/screens/ura/analysis_result_ura_nochar.dart:92:            onTap: () => Navigator.pushNamed(context, '/opening'),
+lib/screens/ura/forbidden_ura_no_char.dart:81:            Navigator.pushNamed(context, '/oracle');
+lib/screens/ura/generate_ura_no_char.dart:100:            Navigator.pushNamed(context, '/forbidden/ura');
+lib/screens/ura/generate_ura_no_char.dart:113:            Navigator.pushReplacementNamed(
+lib/screens/ura/guide_ura.dart:34:              Navigator.pushNamed(context, '/menu/ura');
+lib/screens/ura/input_ura_nochar.dart:78:            Navigator.pushNamed(
+lib/screens/ura/menu_ura.dart:63:          onPressed: () => Navigator.pushNamed(context, '/input/ura'),
+lib/screens/ura/menu_ura.dart:75:          onPressed: () => Navigator.pushNamed(context, '/analysis/input/ura'),
+lib/screens/ura/menu_ura.dart:87:          onPressed: () => Navigator.pushNamed(context, '/guide/ura'),

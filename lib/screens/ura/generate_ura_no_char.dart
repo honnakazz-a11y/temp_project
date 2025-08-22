@@ -126,7 +126,16 @@ class _GenerateScreenUraNoCharState extends State<GenerateScreenUraNoChar> {
         child: UxImageButton(
           normalAsset: Assets.img.button.backLowerNormal,
           pressedAsset: Assets.img.button.backLowerPressed,
-          onPressed: () => UbixEffects.showLineThenGo(context, toRoute: '/menu/ura'),
+          onPressed: () => UbixCrt.show(
+            context,
+            "使い方ガイドにお宝が！",
+            afterDelay: const Duration(milliseconds: 2000),
+            onDone: () {
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, '/menu/ura');
+              }
+            },
+          ),
           semanticLabel: '下戻る',
           width: 500, height: 200,
         ),

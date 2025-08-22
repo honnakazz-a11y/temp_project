@@ -142,7 +142,16 @@ void didChangeDependencies() {
         child: UxImageButton(
           normalAsset: 'assets/images/btn_back_bottom_default.png',
           pressedAsset: 'assets/images/btn_back_bottom_pressed.png',
-          onPressed: () => UbixEffects.showLineThenGo(context, toRoute: '/menu/normal'),
+          onPressed: () => UbixCrt.show(
+            context,
+            "使い方ガイドにお宝が！",
+            afterDelay: const Duration(milliseconds: 2000),
+            onDone: () {
+              if (context.mounted) {
+                Navigator.pushReplacementNamed(context, '/menu/normal');
+              }
+            },
+          ),
           semanticLabel: '下戻る',
           width: 500, height: 200,
         ),

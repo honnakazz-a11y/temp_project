@@ -9,19 +9,44 @@ class OracleScreen extends StatefulWidget {
 }
 
 class _OracleScreenState extends State<OracleScreen> {
+  bool _shownOnce = false; // 1回だけ表示するためのラッチ
+
   @override
   void initState() {
     super.initState();
-    // お告げは解析系に束ねてプリロード
+    // お告げは解析系に束ねてプリロード（既存）
     AssetRegistry.precacheAnalysis(context);
+
+    // 画面入場後に「語録100」から1本を UbixCrt で常駐表示（タイプライター）
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _shownOnce || ubixOracle100.isEmpty) return;
+      _shownOnce = true;
+
+      // const List を可変コピーしてからシャッフル
+      final list = List<String>.from(ubixOracle100);
+      list.shuffle();
+      final pick = list.first;
+
+      // 消えない常駐表示（/oracle では閉じない）
+      UbixCrt.show(context, pick, persist: true);
+    });
+  }
+
+  @override
+  void dispose() {
+    // /oracle を離れるときに常駐Ubixを明示的に閉じる
+    UbixCrt.closeIfShowing(context);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // ← この行の直後に追加
+    // アナログメーター（お告げ：5/7/9帯からランダム）
     final candidates = [5, 7, 9]; // 仕様：5/7/9帯から
     candidates.shuffle();
-    final int oracleBase = candidates.first;    return BaseScreen(children: [
+    final int oracleBase = candidates.first;
+
+    return BaseScreen(children: [
       // 背景（裏）
       const Positioned.fill(
         child: ImageAsset('assets/images/bg_dark_default.png'),
@@ -53,7 +78,7 @@ class _OracleScreenState extends State<OracleScreen> {
 
       // 入力欄は置かない（Oracleは枠のみ）
 
-      // アナログメーター（お告げ：5/7/9帯からランダム）
+      // アナログメーター
       RelPositioned(
         x: 686, y: 1352, width: 388, height: 280,
         child: JitteredFrame(

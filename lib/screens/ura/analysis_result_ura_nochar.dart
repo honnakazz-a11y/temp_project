@@ -75,10 +75,15 @@ class _AnalysisResultScreenUraNoCharState extends State<AnalysisResultScreenUraN
               ? 'assets/images/btn_oracle_pressed.png' // 押したら固定
               : 'assets/images/btn_oracle_default.png',
           pressedAsset: 'assets/images/btn_oracle_pressed.png',
-          onPressed: () {
-            setState(() => _oracleLatched = true); // 一度押したら固定
-            Navigator.pushNamed(context, '/oracle');
-          },
+          onPressed: () => UbixCrt.show(
+            context,
+            "wait...",
+            onDone: () {
+              if (context.mounted) {
+                Navigator.pushNamed(context, '/oracle');
+              }
+            },
+          ),
           semanticLabel: 'Ubixのお告げ',
           width: 946, height: 214,
         ),

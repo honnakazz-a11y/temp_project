@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'widgets/jittered_frame.dart';
+import 'widgets/ubix_crt.dart';
+import 'constants/ubix_oracle_100.dart';
 
 // 集中定義・プリロード（import）
 import 'constants/assets.dart';

@@ -59,11 +59,19 @@ class _Meter {
 }
 
 class _Ura {
-  final bg = 'assets/images/bg_dark_default.png';
-  final crtOverlay = 'assets/images/crt_overlay.png';
+  // 背景
+  final String bgDefault = 'assets/images/bg_dark_default.png';
+  final String bgGlitch1 = 'assets/images/bg_dark_glitch1.png';
+  final String bgGlitch2 = 'assets/images/bg_dark_glitch2.png';
+
+  // フレーム
+  final String frameDefault = 'assets/images/label_braun_frame_default.png';
+  final String frameGlitch1  = 'assets/images/label_braun_frame_glitch1.png';
+  final String frameGlitch2  = 'assets/images/label_braun_frame_glitch2.png';
+  final String frameGlitch3  = 'assets/images/label_braun_frame_glitch3.png';
 }
 
-/// サウンド系
+  /// サウンド系
 class _Sfx {
   final click = 'assets/se/se_button_click.wav';
   final typing = 'assets/se/se_typing_loop.wav';

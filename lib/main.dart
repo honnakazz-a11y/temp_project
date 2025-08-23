@@ -10,6 +10,8 @@ import 'constants/ubix_oracle_100.dart';
 // 集中定義・プリロード（import）
 import 'constants/assets.dart';
 import 'helpers/asset_registry.dart';
+import 'widgets/ura_decor.dart';
+import 'helpers/launch_counter.dart';
 
 // ===== このプロジェクトの「同一ライブラリ」ファイル（part） =====
 part 'screens/opening/splash_video_screen.dart';
@@ -37,7 +39,14 @@ part 'widgets/ux_toggle_image_button.dart';
 part 'widgets/level_slider.dart';
 // ================================================================
 
-void main() => runApp(const TempProjectApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // ★ デバッグ用：起動回数を強制セット
+  await LaunchCounter.debugSet(2);  // ← ここを変えてテスト
+
+  runApp(const TempProjectApp());
+}
 
 class TempProjectApp extends StatelessWidget {
   const TempProjectApp({super.key});
@@ -142,6 +151,7 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const baseW = 1080.0, baseH = 2160.0;
     return Scaffold(
+    backgroundColor: Colors.transparent,    
       body: SafeArea(
         child: Center(
           child: AspectRatio(

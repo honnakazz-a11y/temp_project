@@ -46,80 +46,73 @@ class _OracleScreenState extends State<OracleScreen> {
     candidates.shuffle();
     final int oracleBase = candidates.first;
 
-    return BaseScreen(children: [
-      // 背景（裏）
-      const Positioned.fill(
-        child: ImageAsset('assets/images/bg_dark_default.png'),
-      ),
+    return UraDecor(
+      child: BaseScreen(
+        children: [
+          // 音声トグル（右上）
+          const RelPositioned(
+            x: 786, y: 20, width: 272, height: 96,
+            child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
+          ),
 
-      // ブラウン管（裏：default）
-      const RelPositioned(
-        x: 0, y: 100, width: 1080, height: 810,
-        child: ImageAsset('assets/images/label_braun_frame_default.png'),
-      ),
+          // 上戻る（例外仕様：常に /menu/ura へ置換遷移）
+          RelPositioned(
+            x: 52, y: 20, width: 238, height: 96,
+            child: UxImageButton(
+              normalAsset: Assets.img.button.backUpperNormal,
+              pressedAsset: Assets.img.button.backUpperPressed,
+              onPressed: () => NavHelper.replaceToMenuUra(context),
+              semanticLabel: '上戻る',
+              width: 238, height: 96,
+            ),
+          ),
 
-      // 音声トグル（右上）
-      const RelPositioned(
-        x: 786, y: 20, width: 272, height: 96,
-        child: ImageAsset('assets/images/btn_sound_toggle_on.png'),
-      ),
+          // 入力欄は置かない（Oracleは枠のみ）
 
-      // 上戻る（例外仕様：常に /menu/ura へ置換遷移）
-      RelPositioned(
-        x: 52, y: 20, width: 238, height: 96,
-        child: UxImageButton(
-          normalAsset: Assets.img.button.backUpperNormal,
-          pressedAsset: Assets.img.button.backUpperPressed,
-          onPressed: () => NavHelper.replaceToMenuUra(context),
-          semanticLabel: '上戻る',
-          width: 238, height: 96,
-        ),
-      ),
+          // アナログメーター
+          RelPositioned(
+            x: 686, y: 1352, width: 388, height: 280,
+            child: JitteredFrame(
+              baseIndex: oracleBase,
+              mode: JitterMode.normal,
+            ),
+          ),
 
-      // 入力欄は置かない（Oracleは枠のみ）
+          // 「Ubixのお告げ」ボタン（Oracleでは非アクティブ）※onTapなし
+          const RelPositioned(
+            x: 67, y: 1699, width: 946, height: 214,
+            child: ImageAsset('assets/images/btn_oracle_pressed.png'),
+          ),
 
-      // アナログメーター
-      RelPositioned(
-        x: 686, y: 1352, width: 388, height: 280,
-        child: JitteredFrame(
-          baseIndex: oracleBase,
-          mode: JitterMode.normal,
-        ),
-      ),
+          // 下戻る（例外仕様：常に /menu/ura へ置換遷移）
+          RelPositioned(
+            x: 26, y: 1926, width: 500, height: 200,
+            child: UxImageButton(
+              normalAsset: Assets.img.button.backLowerNormal,
+              pressedAsset: Assets.img.button.backLowerPressed,
+              onPressed: () => NavHelper.replaceToMenuUra(context),
+              semanticLabel: '下戻る',
+              width: 500, height: 200,
+            ),
+          ),
 
-      // 「Ubixのお告げ」ボタン（Oracleでは非アクティブ）※onTapなし
-      const RelPositioned(
-        x: 67, y: 1699, width: 946, height: 214,
-        child: ImageAsset('assets/images/btn_oracle_pressed.png'),
+          // シェア（ダミー）
+          RelPositioned(
+            x: 550, y: 1926, width: 500, height: 200,
+            child: UxImageButton(
+              normalAsset: 'assets/images/btn_share_default.png',
+              pressedAsset: 'assets/images/btn_share_pressed.png',
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('準備中です')),
+                );
+              },
+              semanticLabel: 'シェア（準備中）',
+              width: 500, height: 200,
+            ),
+          ),
+        ],
       ),
-
-      // 下戻る（例外仕様：常に /menu/ura へ置換遷移）
-      RelPositioned(
-        x: 26, y: 1926, width: 500, height: 200,
-        child: UxImageButton(
-          normalAsset: Assets.img.button.backLowerNormal,
-          pressedAsset: Assets.img.button.backLowerPressed,
-          onPressed: () => NavHelper.replaceToMenuUra(context),
-          semanticLabel: '下戻る',
-          width: 500, height: 200,
-        ),
-      ),
-
-      // シェア（ダミー）
-      RelPositioned(
-        x: 550, y: 1926, width: 500, height: 200,
-        child: UxImageButton(
-          normalAsset: 'assets/images/btn_share_default.png',
-          pressedAsset: 'assets/images/btn_share_pressed.png',
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('準備中です')),
-            );
-          },
-          semanticLabel: 'シェア（準備中）',
-          width: 500, height: 200,
-        ),
-      ),
-    ]);
+    );
   }
 }

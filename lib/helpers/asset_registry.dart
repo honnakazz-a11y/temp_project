@@ -20,6 +20,16 @@ class AssetRegistry {
     // （必要に応じて）お告げ
     await precacheImage(const AssetImage('assets/images/btn_oracle_default.png'), context);
     await precacheImage(const AssetImage('assets/images/btn_oracle_pressed.png'), context);
+    
+    await precacheImage(AssetImage(Assets.img.ura.bgDefault), context);
+    await precacheImage(AssetImage(Assets.img.ura.bgGlitch1), context);
+    await precacheImage(AssetImage(Assets.img.ura.bgGlitch2), context);
+
+    await precacheImage(AssetImage(Assets.img.ura.frameDefault), context);
+    await precacheImage(AssetImage(Assets.img.ura.frameGlitch1), context);
+    await precacheImage(AssetImage(Assets.img.ura.frameGlitch2), context);
+    await precacheImage(AssetImage(Assets.img.ura.frameGlitch3), context);    
+    
   }
 
   /// 生成画面用：共通＋メーター全フレーム＋レベルスライダー
@@ -51,8 +61,8 @@ class AssetRegistry {
   static Future<void> precacheForbidden(BuildContext context) async {
     await precacheCommon(context);
 
-    await precacheImage(AssetImage(Assets.img.ura.bg), context);
-    await precacheImage(AssetImage(Assets.img.ura.crtOverlay), context);
+    await precacheImage(AssetImage(Assets.img.ura.bgDefault), context);
+    await precacheImage(AssetImage(Assets.img.ura.frameDefault), context);
 
     for (final p in Assets.img.meter.frames) {
       await precacheImage(AssetImage(p), context);
